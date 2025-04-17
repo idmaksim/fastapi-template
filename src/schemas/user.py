@@ -12,7 +12,7 @@ class UserCreate(UserBase):
 
 
 class UserResponse(UserBase):
-    id: int
+    id: str
     created_at: datetime
 
     class Config:

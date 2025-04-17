@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class JWTSub(BaseModel):
-    id: int
+    id: str
 
     class Config:
         from_attributes = True
