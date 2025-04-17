@@ -1,9 +1,8 @@
 from datetime import datetime
-from typing import List
 
 from pydantic import BaseModel, Field
-from sqlalchemy import Boolean, Float, ForeignKey, String
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column
 
 from src.database import Base
 
