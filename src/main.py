@@ -5,7 +5,7 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
 
 from src.middlewares.logger import ProcessTimeMiddleware
-from src.routes import auth_routes, category_routes, item_routes
+from src.routes import auth_routes
 
 
 # App initialization
@@ -31,6 +31,4 @@ app = FastAPI(
 )
 
 # Include routers
-app.include_router(item_routes.router)
-app.include_router(category_routes.router)
 app.include_router(auth_routes.router)
