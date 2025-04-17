@@ -1,0 +1,36 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  reset:
+    cmds:
+      - uv run alembic downgrade base
+    silent: true
+
+  migrate:
+    cmds:
+      - uv run alembic revision --autogenerate
+    silent: true
+
+  upgrade:
+    cmds:
+      - uv run alembic upgrade head
+    silent: true
+
+  dev:
+    cmds:
+      - uv run uvicorn src.main:app --reload --host localhost --port 8000
+    silent: true
+
+  prod:
+    cmds:
+      - uv run uvicorn src.main:app --workers 10 --host 0.0.0.0 --port 8000
+    silent: true
+
+  lint:
+    cmds:
+      - uv run ruff check 

@@ -1,0 +1,25 @@
+[project]
+name = "fastapi-template"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.15.2",
+    "asyncpg>=0.30.0",
+    "bcrypt>=4.3.0",
+    "dotenv>=0.9.9",
+    "fastapi>=0.115.12",
+    "fastapi-cache2>=0.2.2",
+    "fastapi-cache[inmemory]>=0.1.0",
+    "matplotlib>=3.10.1",
+    "numpy>=2.2.4",
+    "passlib>=1.7.4",
+    "pydantic[email]>=2.11.3",
+    "pydotplus>=2.0.2",
+    "python-jose>=3.4.0",
+    "python-multipart>=0.0.20",
+    "scikit-learn>=1.6.1",
+    "sqlalchemy>=2.0.40",
+    "uvicorn>=0.34.1",
+]
