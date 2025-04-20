@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
 
+from src.env import check_env
 from src.routes import user_routes
 from src.middlewares.logger import ProcessTimeMiddleware
 from src.routes import auth_routes
@@ -11,7 +12,8 @@ from src.routes import auth_routes
 
 # App initialization
 async def lifespan(app: FastAPI):
-    # Startup
+    # Startupcsl
+    check_env()
     FastAPICache.init(InMemoryBackend(), prefix="fastapi-cache")
     yield
 
