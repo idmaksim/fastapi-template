@@ -1,4 +1,3 @@
-import logging
 from typing import Annotated
 
 from fastapi import Depends, HTTPException
@@ -7,8 +6,8 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from src.dependencies.auth_dependencies import AuthServiceDep
 from src.dependencies.user_dependency import UserServiceDep
 from src.types.jwt_sub import JWTSub
+from src.logger import logger
 
-logger = logging.getLogger(__name__)
 security = HTTPBearer(auto_error=False)
 
 INVALID_TOKEN_EXCEPTION = HTTPException(
@@ -23,6 +22,7 @@ async def required_jwt(
     auth_service: AuthServiceDep,
 ) -> JWTSub:
     try:
+        logger.info("Validating access token")
         return await auth_service.validate_access_token(credentials.credentials)
     except Exception:
         logger.warning("Failed to validate JWT token")
@@ -34,6 +34,7 @@ async def get_current_user_token(
     jwt_sub: JWTSub = Depends(required_jwt),
 ) -> JWTSub:
     try:
+        logger.info("Getting current user token")
         return await user_service.get_by_id(jwt_sub.id)
     except Exception:
         logger.warning(f"Failed to get user with id {jwt_sub.id}")

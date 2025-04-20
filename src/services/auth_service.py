@@ -10,6 +10,7 @@ from src.schemas.auth import LoginRequest, RegisterRequest
 from src.services.password_service import verify_password
 from src.services.user_service import UserService
 from src.types.jwt_sub import JWTSub
+from src.logger import logger
 
 
 class AuthService:
@@ -74,4 +75,5 @@ class AuthService:
 
 
 async def get_auth_service(user_service: UserServiceDep) -> AuthService:
+    logger.info("Getting auth service")
     return AuthService(user_service)
