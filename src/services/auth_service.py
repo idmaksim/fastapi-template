@@ -48,6 +48,13 @@ class AuthService:
         except jwt.JWTError:
             raise HTTPException(status_code=401, detail="Invalid refresh token")
 
+    async def validate_access_token(self, token: str) -> JWTSub:
+        try:
+            data = jwt.decode(token, ACCESS_TOKEN_SECRET, algorithms=["HS256"])
+            return JWTSub(**data)
+        except jwt.JWTError:
+            raise HTTPException(status_code=401, detail="Invalid access token")
+
     async def get_refresh_token(self, data: JWTSub) -> str:
         return jwt.encode(
             claims=dict(

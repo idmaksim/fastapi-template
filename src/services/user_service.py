@@ -12,6 +12,14 @@ class UserService:
     def __init__(self, db: AsyncSession):
         self.db = db
 
+    async def get_by_id(self, id: str) -> models.User:
+        query = select(models.User).where(models.User.id == id)
+        result = await self.db.execute(query)
+        user = result.scalar_one_or_none()
+        if user is None:
+            raise HTTPException(status_code=404, detail="User not found")
+        return user
+
     async def get_user_by_email(self, email: str) -> models.User:
         query = select(models.User).where(models.User.email == email)
         result = await self.db.execute(query)

@@ -4,11 +4,10 @@ from pydantic import BaseModel, EmailStr
 
 class UserBase(BaseModel):
     email: EmailStr
-    password: str
 
 
 class UserCreate(UserBase):
-    pass
+    password: str
 
 
 class UserResponse(UserBase):
