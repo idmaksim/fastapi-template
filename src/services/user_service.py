@@ -7,6 +7,7 @@ import src.models as models
 from src.dependencies.session_dependency import SessionDep
 from src.schemas.user import UserCreate
 from src.logger import logger
+from sqlalchemy.orm import selectinload
 
 
 class UserService:
@@ -15,7 +16,11 @@ class UserService:
 
     async def get_by_id(self, id: str) -> models.User:
         logger.info("Getting user by id")
-        query = select(models.User).where(models.User.id == id)
+        query = (
+            select(models.User)
+            .options(selectinload(models.User.avatar))
+            .where(models.User.id == id)
+        )
         result = await self.db.execute(query)
         user = result.scalar_one_or_none()
         if user is None:
