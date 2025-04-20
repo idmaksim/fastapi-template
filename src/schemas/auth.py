@@ -17,3 +17,7 @@ class LoginResponse(BaseModel):
 
 class RegisterResponse(LoginResponse):
     pass
+
+
+class RefreshRequest(BaseModel):
+    refresh_token: str
