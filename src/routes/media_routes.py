@@ -2,6 +2,8 @@ from fastapi import APIRouter
 
 from src.dependencies.file_dependencies import ImageDep
 from src.dependencies.s3_dependencies import S3ServiceDep
+from src.env import CACHE_TTL
+from fastapi_cache.decorator import cache
 
 router = APIRouter(prefix="/media", tags=["media"])
 
@@ -15,6 +17,7 @@ async def upload_media(
 
 
 @router.get("/presigned-url/{object_name}")
+@cache(expire=CACHE_TTL)
 async def get_presigned_url(
     s3_service: S3ServiceDep,
     object_name: str,
