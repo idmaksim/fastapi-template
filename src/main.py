@@ -34,6 +34,12 @@ app = FastAPI(
     swagger_ui_parameters={"tryItOutEnabled": True},
 )
 
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
+
 # Include routers
 app.include_router(auth_routes.router)
 app.include_router(user_routes.router)
