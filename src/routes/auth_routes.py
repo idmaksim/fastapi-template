@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from src.dependencies.auth_dependency import AuthServiceDep
+from src.dependencies.auth_dependencies import AuthServiceDep
 from src.schemas.auth import (
     LoginRequest,
     LoginResponse,

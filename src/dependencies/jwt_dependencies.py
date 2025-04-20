@@ -4,7 +4,7 @@ from typing import Annotated
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-from src.dependencies.auth_dependency import AuthServiceDep
+from src.dependencies.auth_dependencies import AuthServiceDep
 from src.dependencies.user_dependency import UserServiceDep
 from src.types.jwt_sub import JWTSub
 

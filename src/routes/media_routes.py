@@ -1,0 +1,22 @@
+from fastapi import APIRouter
+
+from src.dependencies.file_dependencies import ImageDep
+from src.dependencies.s3_dependencies import S3ServiceDep
+
+router = APIRouter(prefix="/media", tags=["media"])
+
+
+@router.post("/upload")
+async def upload_media(
+    file: ImageDep,
+    s3_service: S3ServiceDep,
+):
+    return await s3_service.upload_file(file.filename, file.file, file.content_type)
+
+
+@router.get("/presigned-url/{object_name}")
+async def get_presigned_url(
+    s3_service: S3ServiceDep,
+    object_name: str,
+):
+    return await s3_service.get_presigned_url(object_name)
