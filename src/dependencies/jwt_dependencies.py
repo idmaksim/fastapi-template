@@ -23,8 +23,6 @@ async def required_jwt(
     auth_service: AuthServiceDep,
 ) -> JWTSub:
     try:
-        if credentials is None or credentials.credentials is None:
-            raise INVALID_TOKEN_EXCEPTION
         return await auth_service.validate_access_token(credentials.credentials)
     except Exception:
         logger.warning("Failed to validate JWT token")
