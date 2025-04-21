@@ -5,4 +5,4 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database import get_session
 
-SessionDep = Annotated[AsyncSession, Depends(get_session)]
+SessionAnnotatedDep = Annotated[AsyncSession, Depends(get_session)]

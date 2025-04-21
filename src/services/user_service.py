@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.services.password_service import hash_password
 import src.models as models
-from src.dependencies.session_dependency import SessionDep
+from src.dependencies.session_dependency import SessionAnnotatedDep
 from src.schemas.user import UserCreate
 from src.logger import logger
 from sqlalchemy.orm import selectinload
@@ -60,5 +60,5 @@ class UserService:
         return db_user
 
 
-async def get_user_service(db: SessionDep) -> UserService:
+async def get_user_service(db: SessionAnnotatedDep) -> UserService:
     return UserService(db)

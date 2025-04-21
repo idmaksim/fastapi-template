@@ -3,8 +3,8 @@ from typing import Annotated
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-from src.dependencies.auth_dependencies import AuthServiceDep
-from src.dependencies.user_dependency import UserServiceDep
+from src.dependencies.auth_dependencies import AuthServiceAnnotatedDep
+from src.dependencies.user_dependency import UserServiceAnnotatedDep
 from src.types.jwt_sub import JWTSub
 from src.logger import logger
 
@@ -19,7 +19,7 @@ INVALID_TOKEN_EXCEPTION = HTTPException(
 
 async def required_jwt(
     credentials: Annotated[HTTPAuthorizationCredentials, Depends(security)],
-    auth_service: AuthServiceDep,
+    auth_service: AuthServiceAnnotatedDep,
 ) -> JWTSub:
     try:
         logger.info("Validating access token")
@@ -30,7 +30,7 @@ async def required_jwt(
 
 
 async def get_current_user_token(
-    user_service: UserServiceDep,
+    user_service: UserServiceAnnotatedDep,
     jwt_sub: JWTSub = Depends(required_jwt),
 ) -> JWTSub:
     try:
@@ -41,5 +41,6 @@ async def get_current_user_token(
         raise INVALID_TOKEN_EXCEPTION
 
 
-JwtDep = Annotated[JWTSub, Depends(required_jwt)]
+JwtAnnotatedDep = Annotated[JWTSub, Depends(required_jwt)]
+JwtDep = Depends(required_jwt)
 CurrentUser = Annotated[JWTSub, Depends(get_current_user_token)]

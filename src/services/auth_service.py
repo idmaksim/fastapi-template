@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from fastapi import HTTPException
 from jose import jwt
 
-from src.dependencies.user_dependency import UserServiceDep
+from src.dependencies.user_dependency import UserServiceAnnotatedDep
 from src.env import ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET
 from src.schemas.auth import LoginRequest, RegisterRequest
 from src.services.password_service import verify_password
@@ -74,6 +74,6 @@ class AuthService:
         return {"access_token": access_token, "refresh_token": refresh_token}
 
 
-async def get_auth_service(user_service: UserServiceDep) -> AuthService:
+async def get_auth_service(user_service: UserServiceAnnotatedDep) -> AuthService:
     logger.info("Getting auth service")
     return AuthService(user_service)

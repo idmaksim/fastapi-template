@@ -9,4 +9,4 @@ def get_image_file(file: UploadFile = File(...)):
     return file
 
 
-ImageDep = Annotated[UploadFile, Depends(get_image_file)]
+ImageAnnotatedDep = Annotated[UploadFile, Depends(get_image_file)]
