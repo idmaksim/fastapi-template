@@ -1,11 +1,12 @@
 from fastapi import APIRouter
 
+from dependencies.jwt_dependencies import JwtDep
 from src.dependencies.file_dependencies import ImageDep
 from src.dependencies.s3_dependencies import S3ServiceDep
 from src.env import CACHE_TTL
 from fastapi_cache.decorator import cache
 
-router = APIRouter(prefix="/media", tags=["media"])
+router = APIRouter(prefix="/media", tags=["media"], dependencies=[JwtDep])
 
 
 @router.post("/upload")
