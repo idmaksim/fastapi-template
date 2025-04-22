@@ -31,7 +31,10 @@ app = FastAPI(
         Middleware(ProcessTimeMiddleware),
     ],
     lifespan=lifespan,
-    swagger_ui_parameters={"tryItOutEnabled": True},
+    swagger_ui_parameters={
+        "tryItOutEnabled": True,
+        "persistAuthorization": True,
+    },
 )
 
 
